@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 
+import EditTodo from "./EditTodo";
+
 const ListTodos = () => {
   const [todos, setTodos] = useState([]);
 
@@ -24,7 +26,7 @@ const ListTodos = () => {
             method: "DELETE"
         })
 
-        setTodos(todos.filter(todo => todo.todo_id != id));
+        setTodos(todos.filter(todo => todo.todo_id !== id));
     } catch (err) {
         console.error(err.message);
     }
@@ -55,7 +57,7 @@ const ListTodos = () => {
             <tr key={todo.todo_id}>
               <td style={{ border: "1px solid black" }}>{todo.description}</td>
               <td style={{ border: "1px solid black" }}>
-                <button
+                {/* <button
                   style={{
                     border: "0px",
                     background: "transparent"
@@ -65,7 +67,8 @@ const ListTodos = () => {
                     className="bi bi-pen-fill"
                     style={{ fontSize: "1.3em", color: "black" }}
                   ></i>
-                </button>
+                </button> */}
+                <EditTodo />
               </td>
               <td style={{ border: "1px solid black" }}>
                 <button style={{ 

@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 
+// import EditTodo from "./EditTodo";
 import EditTodo from "./EditTodo";
 
 const ListTodos = () => {
@@ -68,7 +69,7 @@ const ListTodos = () => {
                     style={{ fontSize: "1.3em", color: "black" }}
                   ></i>
                 </button> */}
-                <EditTodo />
+                <EditTodo todo={todo}/>
               </td>
               <td style={{ border: "1px solid black" }}>
                 <button style={{ 

@@ -1,33 +1,57 @@
 import React, {useState, useEffect, Fragment} from "react";
 
-const EditTodo = () => {
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+
+const EditTodo = ({ todo }) => {
+
+    const [description, setDescription] = useState(todo.description);
+    
+    const updateDescription = async e => {
+        e.preventDefault();
+        try {
+            const body = { description };
+            const response = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            })
+            window.location = "/";
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <Fragment>
-            {/* <!-- Button trigger modal --> */}
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-            </button>
+             <Button variant="primary" onClick={handleShow} style={{
+                    border: "0px",
+                    background: "transparent"
+                  }}
+                >
+                  <i
+                    className="bi bi-pen-fill"
+                    style={{ fontSize: "1.3em", color: "black" }}
+                  ></i>
+            </Button>
 
-            {/* <!-- Modal --> */}
-            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div className="modal-body">
-                    ...
-                </div>
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary">Save changes</button>
-                </div>
-                </div>
-            </div>
-            </div>
+            <Modal show={show} onHide={handleClose} >
+                <Modal.Header closeButton onClick={() => setDescription(todo.description)}>
+                <Modal.Title>Edit Action</Modal.Title>
+                </Modal.Header>
+                <Modal.Body><input type="text" className="form-control" value={description} onChange={e => setDescription(e.target.value)} /></Modal.Body>
+                <Modal.Footer>
+                <Button variant="primary" onClick = {e => updateDescription(e)}>
+                    Save Changes
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </Fragment>
     )
 }

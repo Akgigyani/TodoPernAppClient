@@ -2,6 +2,7 @@ import React, {useState, useEffect, Fragment} from "react";
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import './todo.css';
 
 
 const EditTodo = ({ todo }) => {
@@ -47,8 +48,8 @@ const EditTodo = ({ todo }) => {
                 </Modal.Header>
                 <Modal.Body><input type="text" className="form-control" value={description} onChange={e => setDescription(e.target.value)} /></Modal.Body>
                 <Modal.Footer>
-                <Button variant="primary" onClick = {e => updateDescription(e)}>
-                    Save Changes
+                <Button className="saveButton" onClick = {e => updateDescription(e)}>
+                    Save
                 </Button>
                 </Modal.Footer>
             </Modal>

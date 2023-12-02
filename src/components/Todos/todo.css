@@ -1,0 +1,12 @@
+.saveButton {
+    background: transparent;
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.saveButton:hover {
+    opacity: 0.6 !important;
+    background-color: dimgrey;
+    transition: ease-in 0.500s;
+}
